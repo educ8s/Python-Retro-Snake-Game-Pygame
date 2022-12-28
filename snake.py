@@ -97,7 +97,7 @@ class GAME:
 		self.state = "STOPPED"
 		self.score = 0
 
-screen = pygame.display.set_mode((100+cell_number*cell_size, 100+cell_number*cell_size))
+screen = pygame.display.set_mode((2*OFFSET +cell_number*cell_size, 2*OFFSET + cell_number*cell_size))
 pygame.display.set_caption("Retro Snake!")
 clock = pygame.time.Clock()
 food = pygame.image.load('Graphics/food.png').convert_alpha()
