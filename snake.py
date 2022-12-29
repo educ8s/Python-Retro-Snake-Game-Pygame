@@ -14,17 +14,15 @@ OFFSET = 50
 
 class FOOD:
 	def __init__(self):
-		self.x = random.randint(0,cell_number-1)
-		self.y = random.randint(0,cell_number-1)
-		self.pos = Vector2(self.x, self.y)
+		self.pos = self.generate_random_pos()
 
 	def draw(self):
 		food_rect = pygame.Rect(OFFSET + self.pos.x * cell_size, OFFSET + self.pos.y * cell_size, cell_size, cell_size)
 		screen.blit(food, food_rect)
 
-	def recreate(self, body):
+	def recreate(self, snake_body):
 		self.pos = self.generate_random_pos()
-		while self.pos in body:
+		while self.pos in snake_body:
 			self.pos = self.generate_random_pos()
 
 	def generate_random_pos(self):
@@ -35,7 +33,7 @@ class FOOD:
 
 class SNAKE:
 	def __init__(self):
-		self.body = [Vector2(5,4), Vector2(4,4), Vector2(3,4)]
+		self.body = [Vector2(6,9), Vector2(5,9), Vector2(4,9)]
 		self.direction = Vector2(1,0)
 		self.add_segment = False
 
@@ -46,15 +44,15 @@ class SNAKE:
 	def update(self):
 		if self.add_segment:
 			self.body.insert(0, self.body[0] + self.direction)
+			self.add_segment = False
 		else:
 			headless_body = self.body[:-1]
 			headless_body.insert(0, self.body[0] + self.direction)
 			self.body = headless_body
-		self.add_segment = False
 
 	def reset(self):
-		self.body = [Vector2(5,4), Vector2(4,4), Vector2(3,4)]
-		self.direction = Vector2(1,0)
+		self.body = [Vector2(6,9), Vector2(5,9), Vector2(4,9)]
+		self.direction = Vector2(1, 0)
 
 class GAME:
 	def __init__(self):
@@ -97,12 +95,12 @@ class GAME:
 		self.state = "STOPPED"
 		self.score = 0
 
-screen = pygame.display.set_mode((2*OFFSET + cell_number*cell_size, 2*OFFSET + cell_number*cell_size))
+screen = pygame.display.set_mode((100 + cell_number*cell_size, 100 + cell_number*cell_size))
 pygame.display.set_caption("Retro Snake!")
 clock = pygame.time.Clock()
 food = pygame.image.load('Graphics/food.png').convert_alpha()
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 200)
+pygame.time.set_timer(SCREEN_UPDATE, 250)
 game = GAME()
 
 while True:
