@@ -7,7 +7,7 @@ Although Snake is a very simple game, it covers a lot of the aspects of computer
 # Video Tutorial
 
 <p align="center">
-  <img src="preview.jpg" alt="" width="800">
+  <img src="preview.jpg" alt="" width="500">
 </p>
 
 <p align="center">
