@@ -1,4 +1,5 @@
 import pygame, sys, random
+from pygame import gfxdraw
 from pygame.math import Vector2
 
 GREEN = (173,204,96)
@@ -46,9 +47,8 @@ class SNAKE:
 			self.body.insert(0, self.body[0] + self.direction)
 			self.add_segment = False
 		else:
-			headless_body = self.body[:-1]
-			headless_body.insert(0, self.body[0] + self.direction)
-			self.body = headless_body
+			self.body = self.body[:-1]
+			self.body.insert(0, self.body[0] + self.direction)
 
 	def reset(self):
 		self.body = [Vector2(6,9), Vector2(5,9), Vector2(4,9)]
@@ -100,7 +100,7 @@ pygame.display.set_caption("Retro Snake!")
 clock = pygame.time.Clock()
 food = pygame.image.load('Graphics/food.png').convert_alpha()
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 250)
+pygame.time.set_timer(SCREEN_UPDATE, 200)
 game = GAME()
 
 while True:
@@ -110,18 +110,14 @@ while True:
 			sys.exit()
 
 		if event.type == pygame.KEYDOWN:
-			if event.key == pygame.K_UP:
-				if game.snake.direction.y != 1:
-					game.snake.direction = Vector2(0, -1)
-			if event.key == pygame.K_DOWN:
-				if game.snake.direction.y != -1:
-					game.snake.direction = Vector2(0, 1)
-			if event.key == pygame.K_LEFT:
-				if game.snake.direction.x != 1:
-					game.snake.direction = Vector2(-1, 0)
-			if event.key == pygame.K_RIGHT:
-				if game.snake.direction.x != -1:
-					game.snake.direction = Vector2(1, 0)
+			if event.key == pygame.K_UP and game.snake.direction.y != 1:
+				game.snake.direction = Vector2(0, -1)
+			if event.key == pygame.K_DOWN and game.snake.direction.y != -1:
+				game.snake.direction = Vector2(0, 1)
+			if event.key == pygame.K_LEFT and game.snake.direction.x != 1:
+				game.snake.direction = Vector2(-1, 0)
+			if event.key == pygame.K_RIGHT and game.snake.direction.x != -1:
+				game.snake.direction = Vector2(1, 0)
 			if game.state == "STOPPED":
 				game.state = "RUNNING"
 		if event.type == SCREEN_UPDATE:
