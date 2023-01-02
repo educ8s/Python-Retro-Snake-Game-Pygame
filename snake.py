@@ -1,5 +1,4 @@
 import pygame, sys, random
-from pygame import gfxdraw
 from pygame.math import Vector2
 
 GREEN = (173,204,96)
