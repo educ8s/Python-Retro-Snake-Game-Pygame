@@ -11,9 +11,8 @@ Although Snake is a very simple game, it covers a lot of the aspects of computer
 </p>
 
 <p align="center">
-🎥 Video Tutorial on YouTube is coming soon.
+🎥 <a href="https://youtu.be/1zVlRXd8f7g">Video Tutorial on YouTube</a>
 </p>
-
 <br>
 <br>
 <p align="center">
